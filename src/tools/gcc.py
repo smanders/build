@@ -121,7 +121,7 @@ def init(version = None, command = None, options = None):
         machine_info = subprocess.Popen(command + ['-dumpmachine'], stdout=subprocess.PIPE).communicate()[0]
         machine = __machine_match.search(machine_info).group(1)
 
-        version_info = subprocess.Popen(command + ['-dumpversion'], stdout=subprocess.PIPE).communicate()[0]
+        version_info = subprocess.Popen(command + ['-dumpfullversion'] + ['-dumpversion'], stdout=subprocess.PIPE).communicate()[0]
         version = __version_match.search(version_info).group(1)
         if not flavor and machine.find('mingw') != -1:
             flavor = 'mingw'

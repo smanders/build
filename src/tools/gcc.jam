@@ -100,7 +100,7 @@ rule init ( version ? : command * : options * )
                 local tool-command-string = \"$(tool-command)\" ;
                 tool-command-string = $(tool-command-string:J=" ") ;
                 local tool-version = [ MATCH "^([0-9.]+)" :
-                    [ SHELL "$(tool-command-string) -dumpversion" ] ] ;
+                    [ SHELL "$(tool-command-string) -dumpfullversion -dumpversion" ] ] ;
                 if $(tool-version) != $(version)
                 {
                     # Permit a match betwen a two-digit version specified by the
@@ -178,7 +178,7 @@ rule init ( version ? : command * : options * )
         local machine = [ MATCH "^([^ ]+)" :
             [ SHELL "$(command-string) -dumpmachine" ] ] ;
         version ?= [ MATCH "^([0-9.]+)" :
-            [ SHELL "$(command-string) -dumpversion" ] ] ;
+            [ SHELL "$(command-string) -dumpfullversion -dumpversion" ] ] ;
         switch $(machine:L)
         {
             case *mingw* : flavor ?= mingw ;
